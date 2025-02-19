@@ -1,9 +1,7 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-#define Beginner 0
-#define Intermediate 1
-#define Advanced 2
+
 #define MaxSide 25
 #define MaxMines 99
 #define MoveSize 526
@@ -116,3 +114,28 @@ class Board{
         }
     }
 };
+
+void chooseDifficulty(){
+    int level;
+    cout<<"<-----------------Welcome To Minesweeper----------------------->"<<endl;
+    cout<<"Enter the Difficulty Level: "<<endl;
+    cout<<"Press 0 For Beginner."<<endl;
+    cout<<"Press 1 For Intermediate."<<endl;
+    cout<<"Press 2 For Advanced."<<endl;
+    cin>>level;
+
+    if(level == 0){
+        side = 9;
+        mines = 10;
+    }
+
+    if(level == 1){
+        side = 16;
+        mines = 40;
+    }
+
+    if(level == 2){
+        side = 24;
+        mines = 99;
+    }
+}
