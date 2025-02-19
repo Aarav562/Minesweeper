@@ -27,4 +27,20 @@ class Board{
             }
         }
     }
+
+    bool isMine(int row,int col){
+        if(board[row][col] == '*'){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    void makeMove(int* x,int* y){
+        cout<<"Enter Your Move: (row, column) -> ";
+        scanf("%d%d",x,y);
+        return;
+    }
+    
 };
