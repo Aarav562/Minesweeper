@@ -82,4 +82,37 @@ class Board{
         return count;
     }
 
+    void placeMines(int Mines[][2]){
+        bool mark[MaxSide*MaxSide];
+
+        memset(mark,false,sizeof(mark));
+
+        for(int i=0;i<mines;){
+            int random = rand() % (side * side);
+            int x = random/side;
+            int y = random%side;
+
+            if(mark[random] == false){
+                Mines[i][0] = x;
+                Mines[i][1] = y;
+
+                board[Mines[i][0]][Mines[i][1]] = '*';
+                mark[random] = true;
+                i++;
+            }
+        }
+        return;
+    }
+
+    void replaceMine(int row,int col){
+        for(int i=0;i<side;i++){
+            for(int j=0;j<side;j++){
+                if(board[i][j]!='*'){
+                    board[i][j]= '*';
+                    board[row][col] = '-';
+                    return;
+                }
+            }
+        }
+    }
 };
