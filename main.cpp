@@ -42,5 +42,44 @@ class Board{
         scanf("%d%d",x,y);
         return;
     }
-    
+
+    void printBoard(){
+        int i,j;
+        cout<<" ";
+        for(i=0;i<side;i++){
+            cout<<i;
+        }
+        cout<<"\n\n";
+
+        for(i=0;i<side;i++){
+            cout<<i;
+            for(j=0;j<side;j++){
+                cout<<board[i][j];
+            }
+            cout<<"\n";
+        }
+        return;
+    }
+
+    int countMines(int row,int col,int mines[][2]){
+        int i;
+        int count =0;
+
+
+        int dx[8] = {-1,-1,-1,0,0,1,1,1};
+        int dy[8] = {-1,0,1,-1,1,-1,0,1};
+
+        for(int d = 0;d<8;d++){
+            int newRow = row + dx[d];
+            int newCol = row + dy[d];
+
+            if(isValid(newRow,newCol)==true){
+                if(isMine(newRow,newCol)==true){
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+
 };
