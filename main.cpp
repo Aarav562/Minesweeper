@@ -212,3 +212,13 @@ class Game{
         return;
     }
 };
+
+
+int main(){
+    Board myBoard,realBoard;
+
+    Game* game = new Game();
+    chooseDifficulty();
+    game->playGame(myBoard,realBoard);
+    return 0;
+}
