@@ -139,3 +139,43 @@ void chooseDifficulty(){
         mines = 99;
     }
 }
+
+class Game{
+    public:
+    bool playMineSweeperUtil(Board &myBoard,Board &realBoard, int Mines[][2],int row,int col,int* movesLeft){
+        if(myBoard.board[row][col] != '-'){
+            return false;
+        }
+        int i,j;
+        if(realBoard.board[row][col] == '*'){
+            myBoard.board[row][col] = '*';
+            for(i=0;i<mines;i++){
+                myBoard.board[Mines[i][0]][Mines[i][1]] = '*';
+                myBoard.printBoard();
+                cout<<"\nYou Lost"<<endl;
+                return true;
+            }
+        }
+        else{
+            int count = realBoard.countMines(row,col,Mines);
+            *movesLeft--;
+            myBoard.board[row][col] = count + '0';
+            if(!count){
+                int dx[8] = {-1, -1, -1, 0, 0, 1, 1, 1};
+                int dy[8] = { -1, 0, 1, -1, 1, -1, 0, 1 };
+                
+                for(int d=0;d<8;d++){
+                    int newRow = row + dx[d];
+                    int newCol = col + dy[d];
+
+                    if(isValid(newRow,newCol) == true){
+                        if(realBoard.isMine(newRow,newCol)==false){
+                            playMineSweeperUtil(myBoard,realBoard,Mines,newRow,newCol,movesLeft);
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }  
+};
