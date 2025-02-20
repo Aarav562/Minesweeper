@@ -177,5 +177,38 @@ class Game{
             }
         }
         return false;
-    }  
+    }
+    
+    void cheatGame(Board& realBoard){
+        cout<<"The mines location are: "<<endl;
+        realBoard.printBoard();
+        return;
+    }
+
+    void playGame(Board& realBoard,Board& myBoard){
+
+        bool gameover = false;
+        int movesLeft = side * side - mines,x , y;
+        int Mines[MaxMines][2];
+        realBoard.placeMines(Mines);
+        int curr_move_idx = 0;
+        while(gameover == false){
+            cout<<"Current Status of Board : \n";
+            myBoard.printBoard();
+            myBoard.makeMove(&x,&y);
+            if(curr_move_idx == 0 && realBoard.isMine(x,y) == true){
+                realBoard.replaceMine(x,y);
+            }
+
+            curr_move_idx++;
+
+            gameover = playMineSweeperUtil(myBoard,realBoard,Mines,x,y,&movesLeft);
+
+            if(gameover == false && movesLeft == 0){
+                cout<<"\nYou Won!!\n";
+                gameover = true;
+            }
+        }
+        return;
+    }
 };
