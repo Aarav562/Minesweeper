@@ -60,7 +60,6 @@ class Board{
     }
 
     int countMines(int row,int col,int mines[][2]){
-        int i;
         int count =0;
 
 
@@ -69,7 +68,7 @@ class Board{
 
         for(int d = 0;d<8;d++){
             int newRow = row + dx[d];
-            int newCol = row + dy[d];
+            int newCol = col + dy[d];
 
             if(isValid(newRow,newCol)==true){
                 if(isMine(newRow,newCol)==true){
@@ -146,7 +145,7 @@ class Game{
         if(myBoard.board[row][col] != '-'){
             return false;
         }
-        int i,j;
+        int i;
         if(realBoard.board[row][col] == '*'){
             myBoard.board[row][col] = '*';
             for(i=0;i<mines;i++){
@@ -158,7 +157,7 @@ class Game{
         }
         else{
             int count = realBoard.countMines(row,col,Mines);
-            *movesLeft--;
+            movesLeft--;
             myBoard.board[row][col] = count + '0';
             if(!count){
                 int dx[8] = {-1, -1, -1, 0, 0, 1, 1, 1};
